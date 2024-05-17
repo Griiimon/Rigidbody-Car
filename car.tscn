@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://7fkhjl6n4486"]
+
+[ext_resource type="Script" path="res://car.gd" id="1_ewu82"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4iy8l"]
+friction = 0.2
+bounce = 0.1
+absorbent = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_576nj"]
+albedo_color = Color(0.619608, 0.0823529, 0.141176, 1)
+metallic = 0.68
+roughness = 0.32
+
+[sub_resource type="BoxMesh" id="BoxMesh_e3tmp"]
+material = SubResource("StandardMaterial3D_576nj")
+size = Vector3(1, 1, 2.255)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgf54"]
+albedo_color = Color(0.619608, 0.0823529, 0.141176, 1)
+metallic = 0.68
+roughness = 0.32
+
+[sub_resource type="BoxMesh" id="BoxMesh_11d63"]
+material = SubResource("StandardMaterial3D_dgf54")
+size = Vector3(1, 0.485, 1.115)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pli8t"]
+height = 3.32167
+
+[node name="Car" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.618371)
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_4iy8l")
+can_sleep = false
+continuous_cd = true
+linear_damp_mode = 1
+linear_damp = 5.0
+angular_damp_mode = 1
+angular_damp = 5.0
+script = ExtResource("1_ewu82")
+steer_force = 1000.0
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.480973, 0)
+mesh = SubResource("BoxMesh_e3tmp")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232512, -1.44941)
+mesh = SubResource("BoxMesh_11d63")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.464319, -0.4499)
+shape = SubResource("CapsuleShape3D_pli8t")
+
+[node name="Front" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.74634)

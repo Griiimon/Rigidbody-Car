@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://cndjb4vofn8f7"]
+
+[ext_resource type="PackedScene" uid="uid://7fkhjl6n4486" path="res://car.tscn" id="1_d8itn"]
+
+[sub_resource type="Gradient" id="Gradient_0jtyl"]
+colors = PackedColorArray(0, 0.937255, 0, 1, 0.0532364, 0.178474, 0.111999, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h7k6q"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cl0nk"]
+color_ramp = SubResource("Gradient_0jtyl")
+noise = SubResource("FastNoiseLite_h7k6q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_drfyr"]
+albedo_texture = SubResource("NoiseTexture2D_cl0nk")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pag2r"]
+material = SubResource("StandardMaterial3D_drfyr")
+size = Vector2(500, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trya5"]
+size = Vector3(500, 0.1, 500)
+
+[node name="Game" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_pag2r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_trya5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="Car" parent="." instance=ExtResource("1_d8itn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.271743, 0)
+steer_force = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
