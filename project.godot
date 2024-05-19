@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 DebugHud="*res://debug_hud.tscn"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/csgtomeshinstance/plugin.cfg")
+
 [input]
 
 accelerate={

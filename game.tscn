@@ -25,6 +25,7 @@ size = Vector3(500, 0.1, 500)
 [node name="Game" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
+collision_layer = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("PlaneMesh_pag2r")
@@ -41,3 +42,9 @@ steer_force = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 30, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.931983, -0.362503, 0, 0.362503, 0.931983, 0, -3.13324, -9.36858)
+use_collision = true
+collision_layer = 2
+size = Vector3(5, 10, 10)

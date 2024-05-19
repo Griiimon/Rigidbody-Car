@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7fkhjl6n4486"]
+[gd_scene load_steps=9 format=3 uid="uid://7fkhjl6n4486"]
 
 [ext_resource type="Script" path="res://car.gd" id="1_ewu82"]
 
@@ -28,13 +28,19 @@ size = Vector3(1, 0.485, 1.115)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pli8t"]
 height = 3.32167
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qde6v"]
+points = PackedVector3Array(0.454483, -0.5, -1.45426, 0.454483, 0.5, -1.45426, 0.454483, -0.5, 1.45426, -0.5, 0.454483, 1.45426, 0.5, -0.454483, -1.45426, -0.454483, -0.5, 1.45426, -0.454483, 0.5, 1.45426, -0.5, -0.5, -1.40871, 0.5, 0.5, 1.40871, -0.5, 0.454483, -1.45426, -0.5, -0.454483, -1.45426, 0.5, 0.454483, 1.45426, 0.5, -0.454483, 1.45426, 0.5, 0.454483, -1.45426, -0.5, 0.5, 1.40871, -0.5, -0.5, 1.40871, 0.5, -0.5, -1.40871, -0.5, 0.5, -1.40871, 0.5, 0.5, -1.40871, 0.454483, 0.5, 1.45426, -0.454483, -0.5, -1.45426, 0.5, -0.5, 1.40871, -0.5, -0.454483, 1.45426, -0.454483, 0.5, -1.45426)
+
 [node name="Car" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.618371)
-axis_lock_angular_x = true
-axis_lock_angular_z = true
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_4iy8l")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, -2, 0)
 can_sleep = false
 continuous_cd = true
+max_contacts_reported = 5
+contact_monitor = true
 linear_damp_mode = 1
 linear_damp = 5.0
 angular_damp_mode = 1
@@ -50,13 +56,25 @@ mesh = SubResource("BoxMesh_e3tmp")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232512, -1.44941)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.232512, -1.26505)
 mesh = SubResource("BoxMesh_11d63")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.464319, -0.4499)
 shape = SubResource("CapsuleShape3D_pli8t")
+disabled = true
 
 [node name="Front" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.74634)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.750076, -1.74634)
+
+[node name="Back" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.249924, 0.940811)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47, -0.3)
+shape = SubResource("ConvexPolygonShape3D_qde6v")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.747805, -0.913054)
+current = true
